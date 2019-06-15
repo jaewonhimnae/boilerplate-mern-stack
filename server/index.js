@@ -18,6 +18,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 
+app.get("/", (req, res) => {
+  	  res.json({ "hello ~": "Hi ~~ sadlaskdaskd" });
+});
+
+
 app.get("/api/user/auth", auth,  (req,res) =>{
   res.status(200).json({
     _id:req._id,
