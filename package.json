@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "react blog",
   "main": "index.js",
+  "engine": {
+    "node":"10.15.0",
+    "npm":"6.4.1"
+  },
   "scripts": {
-    "start": "node index.js",
-    "backend": "nodemon index.js"
+    "start": "node server/index.js",
+    "backend": "nodemon server/index.js"
   },
   "author": "John ahn",
   "license": "ISC",
