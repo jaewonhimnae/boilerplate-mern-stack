@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
-import About from "./about"
+import Chat from "./Chat/Chat"
 
 function App() {
   return (
     <div >
       <Switch>
-        <Route path="/about" component={About} />
+        <Route path="/" component={Chat} />
       </Switch>
 
     </div>

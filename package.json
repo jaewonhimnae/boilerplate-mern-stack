@@ -1,15 +1,17 @@
 {
-  "name": "react-blog",
+  "name": "react-chat-app",
   "version": "1.0.0",
   "description": "react blog",
   "main": "index.js",
   "engine": {
-    "node":"10.15.0",
-    "npm":"6.4.1"
+    "node": "10.16.0",
+    "npm": "6.9.0"
   },
   "scripts": {
     "start": "node server/index.js",
-    "backend": "nodemon server/index.js"
+    "backend": "nodemon server/index.js",
+    "frontend": "npm run front --prefix client",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "author": "John ahn",
   "license": "ISC",
@@ -22,6 +24,7 @@
     "mongoose": "^5.4.20"
   },
   "devDependencies": {
+    "concurrently": "^4.1.0",
     "nodemon": "^1.19.1"
   }
 }

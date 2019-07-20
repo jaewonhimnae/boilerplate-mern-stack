@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
-
-
 const userSchema = mongoose.Schema({
     name: {
         type:String,
@@ -82,9 +80,7 @@ userSchema.statics.findByToken = function (token, cb) {
             cb(null, user);
         })
     })
-
 }
-
 
 const User = mongoose.model('User', userSchema)
 
