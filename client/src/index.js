@@ -5,6 +5,8 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
 
+import "materialize-css/dist/css/materialize.min.css";
+
 import Reducer from './reducers';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
