@@ -5,69 +5,20 @@ const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
 
-//Socket.io
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
-
-
 const { Chat } = require("./models/Chat");
 const { User } = require("./models/user");
 const { auth } = require("./middleware/auth");
 
 const mongoose = require("mongoose");
-const connect = mongoose.connect(config.mongoURI, { useNewUrlParser: true })
-                .then(() => console.log("DB connected"))
-                .catch(err => console.error(err));
+
+mongoose
+  .connect(config.mongoURI, { useNewUrlParser: true })
+  .then(() => console.log("DB connected"))
+  .catch(err => console.error(err));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-
-//=================================
-//            Socket.io
-//=================================
-
-io.on("connection", socket => {
-  console.log(" User is connected :) ");
-
-  socket.on("Input Chat Message", msg => {
-    // Save a message that come from the client to Mongo DB
-    connect.then(db => {
-      try {
-        let chat = new Chat({ message: msg.chatMessage, sender: msg.userID });
-
-        chat.save((err, doc) => {
-          if (err) return res.json({ succes: false, err });
-
-          Chat.find({ "_id": doc._id })
-            .populate("sender")
-            .exec((err, doc) => {
-              console.log(doc);
-              return io.emit("Output Chat Message", doc);
-            })
-        });
-
-      } catch (err) {
-        console.error(err);
-      }
-    });
-  });
-});
-
-
-//=================================
-//             CHAT
-//=================================
-
-app.get("/api/chat/getChats", async (req, res) => {
-  await Chat.find()
-    .populate("sender")
-    .exec((err, chats) => {
-      if (err) return res.status(400).send(err);
-      res.status(200).send(chats);
-    });
-});
 
 
 //=================================
@@ -136,7 +87,8 @@ app.get("/api/users/logout", auth, (req,res) =>{
   })
 })
 
-const port = process.env.PORT || 5000;
-server.listen(port, () => {
-  console.log(`Server Running at ${port}`);
+const port = process.env.PORT || 5000
+
+app.listen(port, () => {
+  console.log(`Server Running at ${port}`)
 });
