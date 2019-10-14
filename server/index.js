@@ -5,7 +5,6 @@ const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
 
-const { Chat } = require("./models/Chat");
 const { User } = require("./models/user");
 const { auth } = require("./middleware/auth");
 
