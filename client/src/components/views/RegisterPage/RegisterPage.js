@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import moment from "moment";
 
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/user_actions";
+import { registerUser } from "../../../_actions/user_actions";
 
 class Register extends Component {
   state = {
@@ -13,10 +13,6 @@ class Register extends Component {
     passwordConfirmation: "",
     errors: []
   };
-
-  componentDidMount() {
-    document.title = "John Ahn | Register";
-  }
 
   isFormValid = () => {
     let errors = [];

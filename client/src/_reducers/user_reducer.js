@@ -3,7 +3,7 @@ import {
     REGISTER_USER,
     AUTH_USER,
     LOGOUT_USER,
-} from '../actions/types';
+} from '../_actions/types';
  
 
 export default function(state={},action){
