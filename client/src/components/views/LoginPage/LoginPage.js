@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { withRouter, Link } from "react-router-dom";
+import React from "react";
+import { withRouter } from "react-router-dom";
 import { loginUser } from "../../../_actions/user_actions";
-
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { useDispatch } from "react-redux";
 
-function SignIn(props) {
+function LoginPage(props) {
   const dispatch = useDispatch();
-
-
 
   return (
     <Formik
@@ -26,44 +23,97 @@ function SignIn(props) {
           .min(6, 'Password must be at least 6 characters')
           .required('Password is required'),
       })}
-      onSubmit={fields => {
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          let dataToSubmit = {
+            email: values.email,
+            password: values.password
+          };
 
-        let dataToSubmit = {
-          email: fields.email,
-          password: fields.password
-        };
-    
-        dispatch(loginUser(dataToSubmit)).then(response => {
-          if (response.payload.loginSuccess) {
-            props.history.push("/");
-          } 
-        });
+          dispatch(loginUser(dataToSubmit)).then(response => {
+            if (response.payload.loginSuccess) {
+              props.history.push("/");
+            }
+          });
 
-        //alert('SUCCESS!! :-)\n\n' + JSON.stringify(fields, null, 2))
+          setSubmitting(false);
+        }, 500);
       }}
-      render={({ errors, status, touched }) => (
-        <Form>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
-            <ErrorMessage name="email" component="div" className="invalid-feedback" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
-            <ErrorMessage name="password" component="div" className="invalid-feedback" />
-          </div>
+    >
+      {props => {
+        const {
+          values,
+          touched,
+          errors,
+          dirty,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          handleReset,
+        } = props;
+        return (
+          <div className="app">
+            <h2>Sign In</h2>
+            <form onSubmit={handleSubmit} style={{ width: '350px' }}>
+              <label htmlFor="email" style={{ display: 'block' }}>
+                Email
+              </label>
+              <input
+                id="email"
+                placeholder="Enter your email"
+                type="text"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.email && touched.email ? 'text-input error' : 'text-input'
+                }
+              />
+              {errors.email && touched.email && (
+                <div className="input-feedback">{errors.email}</div>
+              )}
 
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary mr-2">Register</button>
-            <button type="reset" className="btn btn-secondary">Reset</button>
+              <label htmlFor="password" style={{ display: 'block' }}>
+                Password
+            </label>
+              <input
+                id="password"
+                placeholder="Enter your password"
+                type="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.password && touched.password ? 'text-input error' : 'text-input'
+                }
+              />
+              {errors.password && touched.password && (
+                <div className="input-feedback">{errors.password}</div>
+              )}
+
+              <button
+                type="button"
+                className="outline"
+                onClick={handleReset}
+                disabled={!dirty || isSubmitting}
+              >
+                Reset
+              </button>
+              <button type="submit" disabled={isSubmitting}>
+                Submit
+              </button>
+            </form>
           </div>
-        </Form>
-      )}
-    />
+        );
+      }}
+    </Formik>
   );
 };
 
-export default withRouter(SignIn);
+export default withRouter(LoginPage);
+
+
+
 
 

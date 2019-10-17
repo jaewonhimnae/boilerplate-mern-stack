@@ -1,198 +1,189 @@
-import React, { Component } from "react";
+import React from "react";
 import moment from "moment";
-
-import { connect } from "react-redux";
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import { registerUser } from "../../../_actions/user_actions";
+import { useDispatch } from "react-redux";
 
-class Register extends Component {
-  state = {
-    lastname: "",
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-    errors: []
-  };
+function RegisterPage(props) {
+  const dispatch = useDispatch();
+  return (
 
-  isFormValid = () => {
-    let errors = [];
-    let error;
+    <Formik
+      initialValues={{
+        email: '',
+        lastName: '',
+        name: '',
+        password: '',
+        confirmPassword: ''
+      }}
+      validationSchema={Yup.object().shape({
+        name: Yup.string()
+          .required('Name is required'),
+        lastName: Yup.string()
+          .required('Last Name is required'),
+        email: Yup.string()
+          .email('Email is invalid')
+          .required('Email is required'),
+        password: Yup.string()
+          .min(6, 'Password must be at least 6 characters')
+          .required('Password is required'),
+        confirmPassword: Yup.string()
+          .oneOf([Yup.ref('password'), null], 'Passwords must match')
+          .required('Confirm Password is required')
+      })}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
 
-    if (this.isFormEmpty(this.state)) {
-      error = { message: "Fill in all fields" };
-      this.setState({ errors: errors.concat(error) });
-      return false;
-    } else if (!this.isPasswordValid(this.state)) {
-      error = { message: "Password is invalid" };
-      this.setState({ errors: errors.concat(error) });
-      return false;
-    } else {
-      return true;
-    }
-  };
+          let dataToSubmit = {
+            email: values.email,
+            password: values.password,
+            name: values.name,
+            lastname: values.lastname,
+            image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
+          };
 
-  isFormEmpty = ({ name, lastname, email, password, passwordConfirmation }) => {
-    return (
-      !name.length ||
-      !lastname.length ||
-      !email.length ||
-      !password.length ||
-      !passwordConfirmation.length
-    );
-  };
+          dispatch(registerUser(dataToSubmit)).then(response => {
+            if (response.payload.loginSuccess) {
+              props.history.push("/");
+            } else {
+              alert(response.payload.err.errmsg)
+            }
+          })
+         
+          setSubmitting(false);
+        }, 500);
+      }}
+    >
+      {props => {
+        const {
+          values,
+          touched,
+          errors,
+          dirty,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          handleReset,
+        } = props;
+        return (
+          <div className="app">
+            <h2>Sign up</h2>
+            <form onSubmit={handleSubmit} style={{ width: '350px' }}>
 
-  isPasswordValid = ({ password, passwordConfirmation }) => {
-    if (password.length < 6 || passwordConfirmation.length < 6) {
-      return false;
-    } else if (password !== passwordConfirmation) {
-      return false;
-    } else {
-      return true;
-    }
-  };
 
-  displayErrors = errors =>
-    errors.map((error, i) => <p key={i}>{error.message}</p>);
+              <label htmlFor="name" style={{ display: 'block' }}>
+                Name
+              </label>
+              <input
+                id="name"
+                placeholder="Enter your name"
+                type="text"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.name && touched.name ? 'text-input error' : 'text-input'
+                }
+              />
+              {errors.name && touched.name && (
+                <div className="input-feedback">{errors.name}</div>
+              )}
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
 
-  submitForm = event => {
-    event.preventDefault();
+              <label htmlFor="lastName" style={{ display: 'block' }}>
+                Last Name
+              </label>
+              <input
+                id="lastName"
+                placeholder="Enter your last name"
+                type="text"
+                value={values.lastName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.lastName && touched.lastName ? 'text-input error' : 'text-input'
+                }
+              />
+              {errors.lastName && touched.lastName && (
+                <div className="input-feedback">{errors.lastName}</div>
+              )}
 
-    let dataToSubmit = {
-      email: this.state.email,
-      password: this.state.password,
-      name: this.state.name,
-      lastname: this.state.lastname,
-      image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
-    };
 
-    if (this.isFormValid()) {
-      this.setState({ errors: [] });
-      this.props
-        .dispatch(registerUser(dataToSubmit))
-        .then(response => {
-          if (response.payload.success) {
-            setTimeout(() => {
-              this.props.history.push("/");
-            }, 3000);
-          } else {
-            this.setState({
-              errors: this.state.errors.concat(
-                "your attempt to send data to DB was failed"
-              )
-            });
-          }
-        })
-        .catch(err => {
-          this.setState({
-            errors: this.state.errors.concat(err)
-          });
-        });
-    } else {
-      console.log("Form is invalid");
-    }
-  };
+              <label htmlFor="email" style={{ display: 'block' }}>
+                Email
+             </label>
+              <input
+                id="email"
+                placeholder="Enter your email"
+                type="email"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.email && touched.email ? 'text-input error' : 'text-input'
+                }
+              />
+              {errors.email && touched.email && (
+                <div className="input-feedback">{errors.email}</div>
+              )}
 
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <form className="col s12" onSubmit={event => this.submitForm(event)}>
-            <h2>Personal information</h2>
-            <div className="row">
-              <div className="input-field col s12">
-                <input
-                  name="lastname"
-                  onChange={e => this.handleChange(e)}
-                  value={this.state.lastname}
-                  id="lastname"
-                  type="text"
-                  className="validate"
-                />
-                <label htmlFor="lastname">LastName</label>
-              </div>
-            </div>
 
-            <div className="row">
-              <div className="input-field col s12">
-                <input
-                  name="name"
-                  onChange={e => this.handleChange(e)}
-                  value={this.state.name}
-                  id="name"
-                  type="text"
-                  className="validate"
-                />
-                <label htmlFor="name">Name</label>
-              </div>
-            </div>
+              <label htmlFor="password" style={{ display: 'block' }}>
+                Password
+              </label>
+              <input
+                id="password"
+                placeholder="Enter your password"
+                type="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.password && touched.password ? 'text-input error' : 'text-input'
+                }
+              />
+              {errors.password && touched.password && (
+                <div className="input-feedback">{errors.password}</div>
+              )}
 
-            <div className="row">
-              <div className="input-field col s12">
-                <input
-                  name="email"
-                  onChange={e => this.handleChange(e)}
-                  value={this.state.email}
-                  id="email"
-                  type="email"
-                  className="validate"
-                />
-                <label htmlFor="email">Email</label>
-              </div>
-            </div>
-            <h2>Verify password</h2>
+              <label htmlFor="confirmPassword" style={{ display: 'block' }}>
+                Confirm Password
+              </label>
+              <input
+                id="confirmPassword"
+                placeholder="Enter your confirmPassword"
+                type="password"
+                value={values.confirmPassword}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.confirmPassword && touched.confirmPassword ? 'text-input error' : 'text-input'
+                }
+              />
+              {errors.confirmPassword && touched.confirmPassword && (
+                <div className="input-feedback">{errors.confirmPassword}</div>
+              )}
 
-            <div className="row">
-              <div className="input-field col s12">
-                <input
-                  name="password"
-                  onChange={e => this.handleChange(e)}
-                  value={this.state.password}
-                  id="password"
-                  type="password"
-                  className="validate"
-                />
-                <label htmlFor="password">Password</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
-                <input
-                  name="passwordConfirmation"
-                  onChange={e => this.handleChange(e)}
-                  value={this.state.passwordConfirmation}
-                  id="passwordConfirmation"
-                  type="password"
-                  className="validate"
-                />
-                <label htmlFor="passwordConfirmation">Password Confirmation</label>
-              </div>
-            </div>
-
-            {this.state.errors.length > 0 ? (
-              <div className="error_label">
-                {this.displayErrors(this.state.errors)}
-              </div>
-            ) : null}
-
-            <div>
               <button
-                className="btn waves-effect red lighten-2"
-                type="submit"
-                name="action"
-                onClick={event => this.submitForm(event)}
+                type="button"
+                className="outline"
+                onClick={handleReset}
+                disabled={!dirty || isSubmitting}
               >
-                Create an account
+                Reset
               </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    );
-  }
-}
+              <button type="submit" disabled={isSubmitting}>
+                Submit
+              </button>
+            </form>
+          </div>
+        );
+      }}
+    </Formik>
+  );
+};
 
-export default connect()(Register);
+
+export default RegisterPage
