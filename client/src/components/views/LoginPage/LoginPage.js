@@ -54,7 +54,8 @@ function LoginPage(props) {
         } = props;
         return (
           <div className="app">
-            <h2>Sign In</h2>
+
+            <h3>Log In</h3>
             <form onSubmit={handleSubmit} style={{ width: '350px' }}>
               <label htmlFor="email" style={{ display: 'block' }}>
                 Email
@@ -112,8 +113,5 @@ function LoginPage(props) {
 };
 
 export default withRouter(LoginPage);
-
-
-
 
 

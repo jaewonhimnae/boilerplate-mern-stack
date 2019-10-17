@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.0.0-rc.0",
-    "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "formik": "^1.5.8",
     "moment": "^2.24.0",
