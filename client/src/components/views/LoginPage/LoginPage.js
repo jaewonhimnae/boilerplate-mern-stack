@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { loginUser } from "../../../_actions/user_actions";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 import { useDispatch } from "react-redux";
 
@@ -57,53 +58,55 @@ function LoginPage(props) {
 
             <h3>Log In</h3>
             <form onSubmit={handleSubmit} style={{ width: '350px' }}>
-              <label htmlFor="email" style={{ display: 'block' }}>
-                Email
-              </label>
-              <input
-                id="email"
-                placeholder="Enter your email"
-                type="text"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={
-                  errors.email && touched.email ? 'text-input error' : 'text-input'
-                }
-              />
-              {errors.email && touched.email && (
-                <div className="input-feedback">{errors.email}</div>
-              )}
 
-              <label htmlFor="password" style={{ display: 'block' }}>
-                Password
-            </label>
-              <input
-                id="password"
-                placeholder="Enter your password"
-                type="password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={
-                  errors.password && touched.password ? 'text-input error' : 'text-input'
-                }
-              />
-              {errors.password && touched.password && (
-                <div className="input-feedback">{errors.password}</div>
-              )}
+              <Form.Item required>
+                <Input
+                  id="email"
+                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder="Enter your email"
+                  type="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={
+                    errors.email && touched.email ? 'text-input error' : 'text-input'
+                  }
+                />
+                {errors.email && touched.email && (
+                  <div className="input-feedback">{errors.email}</div>
+                )}
+              </Form.Item>
 
-              <button
-                type="button"
-                className="outline"
-                onClick={handleReset}
-                disabled={!dirty || isSubmitting}
-              >
-                Reset
-              </button>
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
+              <Form.Item required>
+                <Input
+                  id="password"
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder="Enter your password"
+                  type="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={
+                    errors.password && touched.password ? 'text-input error' : 'text-input'
+                  }
+                />
+                {errors.password && touched.password && (
+                  <div className="input-feedback">{errors.password}</div>
+                )}
+              </Form.Item>
+
+              <Form.Item>
+                <Checkbox>Remember me</Checkbox>
+                <a className="login-form-forgot" href="/reset_user" style={{ float: 'right' }}>
+                  forgot password
+                  </a>
+                <div>
+                  <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
+                    Log in
+                </Button>
+                </div>
+                Or <a href="/register">register now!</a>
+              </Form.Item>
             </form>
           </div>
         );

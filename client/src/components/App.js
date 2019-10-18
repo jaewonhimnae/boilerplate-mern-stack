@@ -5,16 +5,18 @@ import Auth from "../hoc/auth";
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
+import NavBar from "./views/NavBar/NavBar";
 
 function App() {
   return (
-    <Switch>
-      <Suspense fallback={(<div>Loading</div>)}>
+    <Suspense fallback={(<div>Loading</div>)}>
+      <NavBar />
+      <Switch>
         <Route exact path="/" component={Auth(LandingPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, null)} />
         <Route exact path="/register" component={Auth(RegisterPage, null)} />
-      </Suspense>
-    </Switch>
+      </Switch>
+    </Suspense>
   );
 }
 
