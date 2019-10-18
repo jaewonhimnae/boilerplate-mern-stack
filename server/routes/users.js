@@ -17,9 +17,7 @@ router.get("/auth", auth, (req, res) => {
         name: req.user.name,
         lastname: req.user.lastname,
         role: req.user.role,
-        isGoogleLogin: req.user.oAuthId ? true : false,
         image: req.user.image,
-        bio: req.user.bio
     });
 });
 
