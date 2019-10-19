@@ -73,8 +73,8 @@ function RegisterPage(props) {
           };
 
           dispatch(registerUser(dataToSubmit)).then(response => {
-            if (response.payload.loginSuccess) {
-              props.history.push("/");
+            if (response.payload.success) {
+              props.history.push("/login");
             } else {
               alert(response.payload.err.errmsg)
             }
@@ -99,7 +99,7 @@ function RegisterPage(props) {
         return (
           <div className="app">
             <h2>Sign up</h2>
-            <Form  style={{ minWidth:'375px'}} {...formItemLayout} onSubmit={handleSubmit} >
+            <Form style={{ minWidth: '375px' }} {...formItemLayout} onSubmit={handleSubmit} >
 
               <Form.Item required label="Name">
                 <Input
