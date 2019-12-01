@@ -27,7 +27,6 @@ router.post("/register", (req, res) => {
 
     user.save((err, doc) => {
         if (err) return res.json({ success: false, err });
-        sendEmail(doc.email, doc.name, null, "welcome");
         return res.status(200).json({
             success: true
         });
