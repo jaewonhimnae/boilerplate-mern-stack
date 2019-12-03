@@ -5,6 +5,7 @@
   border-bottom: solid 1px #e8e8e8;
   overflow: auto;
   box-shadow: 0 0 30px #f3f1f1;
+  background-color: white;
 }
 
 .menu__logo {
