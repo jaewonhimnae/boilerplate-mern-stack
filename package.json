@@ -24,7 +24,7 @@
     "mongoose": "^5.4.20",
     "react-redux": "^5.0.7",
     "socket.io": "^2.2.0",
-    "cors": "^2.8.5",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
