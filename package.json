@@ -1,7 +1,7 @@
 {
-  "name": "react-chat-app",
+  "name": "react-boiler-plate",
   "version": "1.0.0",
-  "description": "react blog",
+  "description": "react boiler plate",
   "main": "index.js",
   "engine": {
     "node": "10.16.0",
