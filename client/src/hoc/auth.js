@@ -10,8 +10,8 @@ export default function (ComposedClass, reload, adminRoute = null) {
 
         useEffect(() => {
 
-            dispatch(auth()).then(async response => {
-                if (await !response.payload.isAuth) {
+            dispatch(auth()).then(response => {
+                if (!response.payload.isAuth) {
                     if (reload) {
                         props.history.push('/login')
                     }

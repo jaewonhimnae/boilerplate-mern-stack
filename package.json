@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server/index.js",
     "backend": "nodemon server/index.js",
-    "frontend": "npm run front --prefix client",
+    "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "author": "John ahn",
@@ -25,8 +25,7 @@
     "moment": "^2.24.0",
     "mongoose": "^5.4.20",
     "react-redux": "^5.0.7",
-    "saslprep": "^1.0.3",
-    "socket.io": "^2.2.0"
+    "saslprep": "^1.0.3"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
