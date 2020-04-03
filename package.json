@@ -20,12 +20,14 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
+    "debug": "^4.1.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongoose": "^5.4.20",
     "react-redux": "^5.0.7",
-    "saslprep": "^1.0.3"
+    "saslprep": "^1.0.3",
+    "supports-color": "^7.1.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

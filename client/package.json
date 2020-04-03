@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.24.1",
-    "axios": "^0.18.0",
+    "axios": "^0.19.2",
     "formik": "^1.5.8",
     "moment": "^2.24.0",
     "react": "^16.8.6",
@@ -16,7 +16,9 @@
     "redux": "^4.0.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "yup": "^0.27.0"
+    "yup": "^0.27.0",
+    "core-js": "^3.6.4",
+    "react-app-polyfill": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -40,6 +42,6 @@
     ]
   },
   "devDependencies": {
-    "http-proxy-middleware": "^0.19.1"
+    "http-proxy-middleware": "^1.0.3"
   }
 }
