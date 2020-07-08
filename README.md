@@ -1,4 +1,4 @@
-Boilerplate-mern-stack is being sponsored by the following tool 
+Boilerplate-mern-stack is being sponsored by the following tool <br />
 Please help to support us by taking a look and signing up to a free trial
 <a href="https://tracking.gitads.io/?repo=boilerplate-mern-stack"><img src="https://images.gitads.io/boilerplate-mern-stack" alt="GitAds"/></a> 
 
