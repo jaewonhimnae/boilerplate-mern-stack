@@ -16,4 +16,4 @@ If you have problem, feel free to ask me ^^
 https://www.youtube.com/channel/UCFyXA9x8lpL3EYWeYhj4C4Q?view_as=subscriber
 
 
-<a href="https://tracking.gitads.io/?repo=boilerplate-mern-stack"><img src="boilerplate-mern-stack" alt="GitAds"/></a>
+ <a href="https://tracking.gitads.io/?repo=boilerplate-mern-stack"><img src="https://images.gitads.io/boilerplate-mern-stack" alt="GitAds"/></a> 
