@@ -56,9 +56,11 @@ function LandingPage() {
                             movieId={movie.id}
                             movieName={movie.original_title}
                         />
+
                     </React.Fragment>   
                 ))}
             </Row>
+            
             </div>
 
         </div>
