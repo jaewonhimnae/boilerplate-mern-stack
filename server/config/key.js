@@ -1,5 +1,7 @@
-if (process.env.NODE_ENV === 'production') {
-    module.exports = require('./prod');
+const environment = process.env.NODE_ENV;
+
+if (environment === "production") {
+  module.exports = require("./prod");
 } else {
-    module.exports = require('./dev');
+  module.exports = require("./dev");
 }
