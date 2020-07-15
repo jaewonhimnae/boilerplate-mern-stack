@@ -1,5 +1,5 @@
 import React from 'react'
-import {Icon} from 'antd';
+import { ShoppingOutlined } from '@ant-design/icons';
 
 function Footer() {
     return (
@@ -8,7 +8,8 @@ function Footer() {
             flexDirection: 'column', alignItems: 'center',
             justifyContent: 'center', fontSize:'1rem'
         }}>
-           <p> Happy Coding  <Icon type="smile" /></p>
+           <p> Shopping Online  <ShoppingOutlined /></p>
+           <sub>Author by Nhat Nguyen</sub>
         </div>
     )
 }
