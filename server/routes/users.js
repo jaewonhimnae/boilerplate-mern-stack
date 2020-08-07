@@ -42,6 +42,10 @@ router.post("/login", (req, res) => {
             });
 
         user.comparePassword(req.body.password, (err, isMatch) => {
+            if(err)
+            {
+                return res.status(400).send(err);
+            }
             if (!isMatch)
                 return res.json({ loginSuccess: false, message: "Wrong password" });
 
