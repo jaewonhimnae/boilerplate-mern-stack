@@ -25,9 +25,11 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongoose": "^5.4.20",
+    "node-sass": "^4.14.1",
     "react-redux": "^5.0.7",
     "saslprep": "^1.0.3",
-    "supports-color": "^7.1.0"
+    "supports-color": "^7.1.0",
+    "yarn": "^1.22.4"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

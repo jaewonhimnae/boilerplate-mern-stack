@@ -1,0 +1,17 @@
+.upload-product {
+  max-width: 1000px;
+  margin: 2rem auto;
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .ant-upload-select-picture-card i {
+    color: #999;
+    font-size: 32px;
+  }
+  
+  .ant-upload-select-picture-card .ant-upload-text {
+    margin-top: 8px;
+    color: #666;
+  }
+}
