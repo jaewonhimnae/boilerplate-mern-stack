@@ -5,10 +5,13 @@
   "dependencies": {
     "antd": "^3.24.1",
     "axios": "^0.19.2",
+    "core-js": "^3.6.4",
     "formik": "^1.5.8",
     "moment": "^2.24.0",
     "react": "^16.8.6",
+    "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.8.6",
+    "react-dropzone": "^14.2.2",
     "react-icons": "^3.7.0",
     "react-redux": "^7.1.0-rc.1",
     "react-router-dom": "^5.0.1",
@@ -16,9 +19,7 @@
     "redux": "^4.0.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "yup": "^0.27.0",
-    "core-js": "^3.6.4",
-    "react-app-polyfill": "^1.0.6"
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
