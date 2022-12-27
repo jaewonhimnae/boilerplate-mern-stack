@@ -4,11 +4,17 @@ import { FaCode } from "react-icons/fa";
 function LandingPage() {
     return (
         <>
-            <div className="app">
-                <FaCode style={{ fontSize: '4rem' }} /><br />
-                <span style={{ fontSize: '2rem' }}>Let's Start Coding!</span>
+        <div style={{width: '100%', margin: '0'}}>
+            {/* Main Image */}
+            <div style={{width: '85%', margin: '1rem auto'}}>
+                <h2>Movies by latest</h2>
+                <hr />
             </div>
-            <div style={{ float: 'right' }}>Thanks For Using This Boiler Plate by John Ahn</div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                <button>Load More</button>
+            </div>
+
+        </div>
         </>
     )
 }
