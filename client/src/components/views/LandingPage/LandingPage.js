@@ -10,7 +10,8 @@ function LandingPage() {
     const [mainMovieImage, setMainMovieImage] = useState(null);
 
     useEffect(() => {
-        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`
+                                                                            // en-US
+        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko&page=${page}`
         fetch(endPoint)
         .then(res => res.json())
         .then(res => {
@@ -22,9 +23,14 @@ function LandingPage() {
     return (
         <div style={{width: '100%', margin: '0'}}>
             {/* Main Image */}
-            {mainMovieImage &&
-                <MainImage image={`${IMAGE_BASE_URL}w1280${mainMovieImage.backdrop_path}`} />
+            {mainMovieImage &&  // 값이 있을 때 렌더링하도록
+                <MainImage 
+                image={`${IMAGE_BASE_URL}w1280${mainMovieImage.backdrop_path}`}
+                title={mainMovieImage.title}    // 원제: original_title
+                text={mainMovieImage.overview}
+                 />
             }
+
             <div style={{width: '85%', margin: '1rem auto'}}>
                 <h2>by latest</h2>
                 <hr />

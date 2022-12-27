@@ -16,8 +16,8 @@ export default function MainImage(props) {
         }}>
             <div>
                 <div style={{position: 'absolute', maxWidth: '500px', bottom: '2rem', marginLeft: '2rem'}}>
-                    <h2 style={{color: 'white'}}>title</h2>
-                    <p style={{color: 'white', fontSize: '1rem'}}>description</p>
+                    <h2 style={{color: 'white'}}>{props.title}</h2>
+                    <p style={{color: 'white', fontSize: '1rem'}}>{props.text}</p>
                 </div>
             </div>
         </div>
